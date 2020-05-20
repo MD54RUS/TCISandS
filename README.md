@@ -21,6 +21,7 @@ First-time configuration
 -----
 * Define Liferay properties in pom.xml
 Or you can do it in your local reposytory in settings.xml like this:
+```
 <settings>
 <profiles>
 <profile>
@@ -36,6 +37,7 @@ Or you can do it in your local reposytory in settings.xml like this:
 </profile>
 </profiles>
 </settings>
+```
 And use this profile with all maven tasks.
 
 * Configure your liferay portal
@@ -61,6 +63,8 @@ First-time configuration
 -----
 * Определите параметры Liferay в pom.xml
 Или создайте профиль в settings.xml в локальном maven-репозитории и определите свойства там. Например:
+
+```
 <settings>
 <profiles>
 <profile>
@@ -76,10 +80,13 @@ First-time configuration
 </profile>
 </profiles>
 </settings>
+```
 И подключайте этот профиль при выполнении задач maven.
 
 Развертывание
 ------
+При правильном указании параметров liferay .war файл должен скопироваться в директорию auto deploy сам.
+Если этого не произошло:
 Для liferay + Tomcat положите .war файл в директорию deploy в папке портала и дождитесь авто-развертывания.
 
 //todo 
