@@ -10,7 +10,7 @@ Using:
   * Spring Transactions
   * Spring Data JPA
   * Spring Portlet MVC
-* Liferay 6.2
+* Liferay 6.2 (with tomcat 7.0.62)
 * Project Lombok
 * Portlet 2.0
 * JPA 2.1 + Hibernate (as JPA provider)
