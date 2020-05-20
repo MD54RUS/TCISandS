@@ -1,0 +1,17 @@
+.blockLine {
+}
+
+.filter_label {
+    border: 1px solid black;
+    text-align: center;
+}
+
+
+.filterBlock {
+    padding: 3%;
+}
+
+.filterBlock select {
+    width: 80%;
+}
+

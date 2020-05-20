@@ -5,9 +5,9 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface VacancyService {
-    void loadVacancy();
+    int loadVacancy(long specialisationId, long areaId);
 
     Iterable<Vacancy> getVacancy();
 
-    Iterable<Vacancy> getVacancyPerPage(Pageable page);
+    Iterable<Vacancy> getVacancyPerPage(long specialisationId, long areaId, Pageable page);
 }

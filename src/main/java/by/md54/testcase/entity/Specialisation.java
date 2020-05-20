@@ -1,5 +1,6 @@
 package by.md54.testcase.entity;
 
+import by.md54.testcase.DTO.SpecialisationDTO;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,8 +23,16 @@ public class Specialisation {
     public Specialisation() {
     }
 
-    public Specialisation(Specialisation specialisation) {
 
-
+    public Specialisation(SpecialisationDTO dto) {
+        this.id = dto.id;
+        this.name = dto.name;
     }
+
+    public Specialisation(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
 }

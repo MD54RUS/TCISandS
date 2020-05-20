@@ -12,11 +12,7 @@ import java.util.Optional;
 
 public interface AreaRepository extends CrudRepository<Area, Long> {
 
-    default void update(Area area) {
-        if (!this.findById(area.getId()).isPresent()) {
-            this.save(area);
-        }
-    }
-
     Optional<Area> findById(long id);
+
+    Iterable<Area> getAreaByParentId(Long parentId);
 }

@@ -17,8 +17,6 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 
 public class VacancyServiceImpl implements VacancyService {
-    private static final long specialisationId = 1L;
-    private static final long areaId = 4L;
     private static final int MAX_REQUEST_QUANTITY = 100;
     private static final String URL = "https://api.hh.ru/vacancies?specialization=%d&area=%d&page=%d&per_page=%d";
     private final RestTemplate restTemplate = new RestTemplate();
@@ -33,38 +31,35 @@ public class VacancyServiceImpl implements VacancyService {
         this.employerRepository = employerRepository;
     }
 
+
+    //todo Переделать getForEntity на массив.
+
     @Override
-    public void loadVacancy() {
+    public int loadVacancy(long specialisationId, long areaId) {
         String request = String.format(URL, specialisationId, areaId, 0, 1);
-
-
         ResponseEntity<AnswerVacancyDTO> result = restTemplate.getForEntity(request, AnswerVacancyDTO.class);
-        Area area;
-        if (areaRepository.findById(areaId).isPresent()) {
-            area = areaRepository.findById(areaId).get();
-        } else {
-            area = new Area(result.getBody().items[0].area);
-            areaRepository.save(area);
-        }
-        vacancyRepository.deleteAllByAreaAndSpecialisation(area, specialisationId);
-        int quantity = result.getBody().found;
-        quantity = Math.min(quantity, 2000); //Ограничение API
-        int count = 0;
+        Area area = areaRepository.findById(areaId).get();
+        vacancyRepository.deleteAllByAreaIdAndSpecialisation(areaId, specialisationId);
+        int found = result.getBody().found;
+        int quantity = Math.min(found, 2000); //Ограничение API
+        found = quantity;
+        int pageNumber = 0;
         Vacancy tempVacancy;
         while (quantity > 0) {
-            request = String.format(URL, specialisationId, areaId, count, MAX_REQUEST_QUANTITY);
+            request = String.format(URL, specialisationId, areaId, pageNumber, MAX_REQUEST_QUANTITY);
             result = restTemplate.getForEntity(request, AnswerVacancyDTO.class);
             for (VacancyDTO vacancyDTO : result.getBody().items) {
                 vacancyDTO.specialisation = specialisationId;
                 tempVacancy = new Vacancy(vacancyDTO);
-                areaRepository.update(tempVacancy.getArea());
-                employerRepository.update(tempVacancy.getEmployer());
+                employerRepository.save(tempVacancy.getEmployer());
                 vacancyRepository.save(tempVacancy);
             }
-            count++;
+            pageNumber++;
             quantity -= MAX_REQUEST_QUANTITY;
         }
+        return found;
     }
+
 
     @Override
     public Iterable<Vacancy> getVacancy() {
@@ -72,8 +67,8 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public Iterable<Vacancy> getVacancyPerPage(Pageable page) {
-        return vacancyRepository.findAll(page).getContent();
+    public Iterable<Vacancy> getVacancyPerPage(long specialisationId, long areaId, Pageable page) {
+        return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId, page).getContent();
     }
 
 

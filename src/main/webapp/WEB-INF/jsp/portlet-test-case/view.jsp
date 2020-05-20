@@ -4,8 +4,71 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="portlet" uri="http://java.sun.com/portlet_2_0" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="aui" uri="http://alloy.liferay.com/tld/aui" %>
 
-This is the <b>test case for SandS</b> portlet.<br />
+This is the <b>test case for ISandS</b> portlet.<br />
+<br>
+<br>
+<portlet:defineObjects/>
+
+
+<jsp:useBean id="area" scope="request" type="by.md54.testcase.entity.Area"/>
+<jsp:useBean id="specialisation" scope="request" type="by.md54.testcase.entity.Specialisation"/>
+
+<%--todo page perPage??--%>
+
+<portlet:renderURL var="showFilteringFormURL">
+    <portlet:param name="act" value="changeFilter"/>
+    <portlet:param name="specId" value="<%=String.valueOf(specialisation.getId())%>"/>
+    <portlet:param name="areaId" value="<%=String.valueOf(area.getId())%>"/>
+</portlet:renderURL>
+
+
+<%--<a href="<%=showFilteringFormURL%>">Change filter</a>--%>
+
+
+<portlet:renderURL var="loadVacancy">
+    <portlet:param name="action" value="loadFilter"/>
+</portlet:renderURL>
+<h2 align="center" class="text-primary">Данные загружены с сайта hh.ru</h2>
+<hr/>
+
+
+<div class="filter_label">
+    <label path="AreaName" class="blockLine">${area.name}</label>
+    <label path="SpecialisationName" class="blockLine">${specialisation.name}</label>
+
+    <aui:button class="blockLine" onClick="<%=showFilteringFormURL%>" value="Change filter"/>
+</div>
+<%--<button value="Change request" formaction="${showFilteringFormURL}" type="submit" onsubmit="" onclick="location.href = <%=showFilteringFormURL%>">Change request</button>--%>
+
+<%--<form:form name="catalogForm" method="post" action="${loadVacancy}">--%>
+<%--<form:form name="catalogForm" action="${loadVacancy}" >--%>
+<%--    <jsp:useBean id="areas" scope="request" type="java.lang.Iterable"/>--%>
+<%--    <jsp:useBean id="specialisations" scope="request" type="java.lang.Iterable"/>--%>
+<%--    --%>
+<%--    <c:if test="${not empty areas}">--%>
+<%--&lt;%&ndash;        <form:hidden path="recordId" />&ndash;%&gt;--%>
+<%--        <label path="name">Name:</label>--%>
+
+<%--        <select class="selectpicker" name="countRow" id="countRowSelect"--%>
+<%--                onchange="function x() {--%>
+<%--                this.options.selected=true;}--%>
+<%--                ">--%>
+<%--            <jsp:useBean id="areaId" scope="request" type="java.lang.Long"/>--%>
+<%--            <c:forEach var="area" items="${areas}">--%>
+<%--                <option value="${area.name}" ${area.id == areaId? "selected": ""}>${area.name}</option>--%>
+<%--            </c:forEach>--%>
+<%--&lt;%&ndash;            <% for (Object area : areas) { %>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <option value="<%=area%>" <%= area.toString() == area? "selected": ""%>><%=area%></option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <%} %>&ndash;%&gt;--%>
+
+<%--        </select>--%>
+<%--    </c:if>--%>
+
+<%--    <br>--%>
+<%--</form:form>--%>
+
 
 <%--<jsp:useBean id="releaseInfo" scope="request" type="java.lang.String"/>--%>
 <%--Release info: <c:out escapeXml="true" value="${releaseInfo}" />;<br />--%>
@@ -14,24 +77,38 @@ This is the <b>test case for SandS</b> portlet.<br />
 
 <%!
     private PermissionChecker permisionChecker;
-%><portlet:renderURL var="showAddRecordUrl">
-    <%--    <portlet:param name="act" value="addRecordForm" />--%>
-</portlet:renderURL>
-<portlet:renderURL var="showUrl">
-</portlet:renderURL>
+%>
 
-<a href="<portlet:renderURL var="showAddRecordUrl">
-						</portlet:renderURL>"><b>Update</b></a>
+<%--<portlet:renderURL var="showAddRecordUrl">--%>
+<%--    &lt;%&ndash;    <portlet:param name="act" value="addRecordForm" />&ndash;%&gt;--%>
+<%--</portlet:renderURL>--%>
+<%--<portlet:renderURL var="showUrl">--%>
+<%--</portlet:renderURL>--%>
+
+<%--            <a href="--%>
+<%--						<portlet:actionURL>--%>
+<%--							<portlet:param name="act" value="addRecord" />--%>
+<%--						</portlet:actionURL>">--%>
+<%--                <b>Update</b></a>--%>
 
 
 <body>
-<portlet:defineObjects/>
+
+
 <%--<c:if test="<%= permisionChecker.isOmniadmin()%>">--%>
-<%--<jsp:include page="config.jsp"/>--%>
+<%--<jsp:include page="changeFilter.jsp"/>--%>
 <%--</c:if>--%>
 
 <jsp:include page="vacancyPage.jsp"/>
 
+<%--<portlet:resourceURL var="testURL">--%>
+<%--    <portlet:param name="pageAddress" value="view?page=2,perPage=5" />--%>
+<%--</portlet:resourceURL>--%>
+
+
+<%--<portlet:renderURL>--%>
+<%--    <portlet:param name="act" value="testURL"/>--%>
+<%--</portlet:renderURL>--%>
 
 </body>
 
@@ -46,19 +123,19 @@ This is the <b>test case for SandS</b> portlet.<br />
 <%--            <c:forEach var="vacancy" items="${vacancy}">--%>
 <%--                <tr>--%>
 <%--                    <td valign="top"><c:out value="${vacancy.name}" /></td>--%>
-<%--&lt;%&ndash;                    <td align="center" valign="top" width="100px"><a href="&ndash;%&gt;--%>
-<%--&lt;%&ndash;						<portlet:renderURL>&ndash;%&gt;--%>
-<%--&lt;%&ndash;							<portlet:param name="act" value="editRecordForm" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;							<portlet:param name="recordId" value="${record.recordId}" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;						</portlet:renderURL>&ndash;%&gt;--%>
-<%--&lt;%&ndash;					"><b>Edit</b></a>&ndash;%&gt;--%>
+<%--                    <td align="center" valign="top" width="100px"><a href="--%>
+<%--						<portlet:renderURL>--%>
+<%--							<portlet:param name="act" value="editRecordForm" />--%>
+<%--							<portlet:param name="recordId" value="${record.recordId}" />--%>
+<%--						</portlet:renderURL>--%>
+<%--					"><b>Edit</b></a>--%>
 <%--&lt;%&ndash;                        /&ndash;%&gt;--%>
-<%--&lt;%&ndash;                        <a href="&ndash;%&gt;--%>
-<%--&lt;%&ndash;						<portlet:actionURL>&ndash;%&gt;--%>
-<%--&lt;%&ndash;							<portlet:param name="act" value="removeRecord" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;							<portlet:param name="id" value="${record.recordId}" />&ndash;%&gt;--%>
-<%--&lt;%&ndash;						</portlet:actionURL>" onclick="return confirmRemove()">&ndash;%&gt;--%>
-<%--&lt;%&ndash;                            <b>Remove</b></a></td>&ndash;%&gt;--%>
+<%--                        <a href="--%>
+<%--						<portlet:actionURL>--%>
+<%--							<portlet:param name="act" value="removeRecord" />--%>
+<%--							<portlet:param name="id" value="${record.recordId}" />--%>
+<%--						</portlet:actionURL>" onclick="return confirmRemove()">--%>
+<%--                            <b>Remove</b></a></td>--%>
 <%--                </tr>--%>
 <%--            </c:forEach>--%>
 <%--        </table>--%>

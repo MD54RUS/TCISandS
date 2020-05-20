@@ -15,24 +15,32 @@
 %>
 
 <portlet:defineObjects/>
-
+<input name="perPageInput"/>
 <a href="
-<portlet:renderURL var="getVacancyURL">
-    <portlet:param name="action" value="getVacancy"/>
+<portlet:renderURL>
+<%--    <portlet:param name="action" value="getVacancy"/>--%>
     <portlet:param name="perPage" value = "<%=String.valueOf(perPage)%>"/>
     <portlet:param name="page" value="<%=String.valueOf(pageCount)%>" />
 </portlet:renderURL>
 "><b>Render</b></a>
-<portlet:renderURL var="getVacancyURL">
-    <portlet:param name="action" value="getVacancy"/>
-    <portlet:param name="perPage" value="<%=String.valueOf(perPage)%>"/>
-    <portlet:param name="page" value="<%=String.valueOf(pageCount)%>"/>
+
+<a href="
+<portlet:renderURL>
+<%--    <portlet:param name="action" value="getVacancy"/>--%>
+    <portlet:param name="perPage" value = "5"/>
+    <portlet:param name="page" value="0" />
 </portlet:renderURL>
-<%%>
+"><b>Render 5</b></a>
+
+<%--<portlet:renderURL var="getVacancyURL">--%>
+<%--    <portlet:param name="action" value="getVacancy"/>--%>
+<%--    <portlet:param name="perPage" value="<%=String.valueOf(perPage)%>"/>--%>
+<%--    <portlet:param name="page" value="<%=String.valueOf(pageCount)%>"/>--%>
+<%--</portlet:renderURL>--%>
+<%--<%%>--%>
 
 <div class="container">
-    <h2 align="center" class="text-primary">Данные загружены с сайта hh.ru</h2>
-    <hr/>
+
     <div></div>
     <p>Выводить по <select style="width: 60px" class="selectpicker" name="countRow" id="countRowSelect"
                            onchange="function x() {
@@ -48,15 +56,16 @@
         <% for (int counts : rowCountCollection) { %>
         <%--        <c:forEach items="<%=rowCountCollection%>" var="counts">--%>
         <%--            <%= (eqArray.get(count).equals("eqName"))?"selected":"" %>--%>
-        <option value="<a href="
-        <portlet:renderURL var="getVacancyURL">
-            <portlet:param name="action" value="getVacancy"/>
-            <portlet:param name="perPage" value="<%=String.valueOf(perPage)%>"/>
-            <portlet:param name="page" value="<%=String.valueOf(pageCount)%>"/>
-        </portlet:renderURL>
-        "</a>"<%= counts == perPage ? "selected" : ""%><%=counts%>
+        <%--        <option value="<a href="--%>
+        <%--        <portlet:renderURL var="getVacancyURL">--%>
+        <%--            <portlet:param name="action" value="getVacancy"/>--%>
+        <%--            <portlet:param name="perPage" value="<%=String.valueOf(perPage)%>"/>--%>
+        <%--            <portlet:param name="page" value="<%=String.valueOf(pageCount)%>"/>--%>
+        <%--        </portlet:renderURL>--%>
+        <%--        "</a>"<%= counts == perPage ? "selected" : ""%><%=counts%>--%>
+        <%--        </option>--%>
+        <option value="<%=counts%>" <%= counts == perPage ? "selected" : ""%>><%=counts%>
         </option>
-        <%--        <option value="<%=counts%>" <%= counts == perPage? "selected": ""%>><%=counts%></option>--%>
         <%} %>
         <%--        </c:forEach>--%>
     </select> строк на страницу.
@@ -71,7 +80,6 @@
         </tr>
         </thead>
         <tbody>
-
 
         <jsp:useBean id="vacancies" scope="request" type="java.lang.Iterable"/>
         <c:if test="${not empty vacancies}">
