@@ -58,6 +58,9 @@ IntelliJ IDEA setup
   * Create [Remote Run configuration](https://www.jetbrains.com/help/idea/2016.3/run-debug-configuration-remote.html) for remote debug. See [this article](http://blog.trifork.com/2014/07/14/how-to-remotely-debug-application-running-on-tomcat-from-within-intellij-idea/) for details.
 
 
+Тестовое задание. Портлет для портала liferay 6.2. Полное описание в файле ТЗ.pdf.
+
+
 Для запуска
 First-time configuration
 -----
