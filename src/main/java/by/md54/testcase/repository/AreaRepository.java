@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface AreaRepository extends CrudRepository<Area, Long> {
 
     Optional<Area> findById(long id);
+
     Iterable<Area> getAreaByParentId(Long parentId);
 }

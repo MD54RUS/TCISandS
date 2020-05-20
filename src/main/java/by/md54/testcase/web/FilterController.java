@@ -34,12 +34,12 @@ public class FilterController {
     public String showFilteringForm(RenderRequest request, Model model) {
         long areaId = ParamUtil.getLong(request, "areaId", DEFAULT_AREA_ID);
         Area area = areaService.getArea(areaId);
-        logger.info(area);
+        logger.debug(area);
 
         long specId = ParamUtil.getLong(request, "specId", DEFAULT_SPECIALISATION_ID);
         Specialisation spec = specialisationService.getSpecById(specId);
 
-        logger.info("specId = " + specId);
+        logger.debug("specId = " + specId);
 
         Area root;
         Area parent;
@@ -57,12 +57,6 @@ public class FilterController {
             parent = areaService.getArea(area.getParentId());
             root = areaService.getArea(parent.getParentId());
         }
-
-        logger.info("root, parent, child");
-        logger.info(root);
-        logger.info(parent);
-        logger.info(child);
-
 
         //todo переделать на Id?
 

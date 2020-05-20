@@ -25,7 +25,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 
-
 @Controller
 @RequestMapping("VIEW")
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
@@ -38,7 +37,7 @@ public class IndexController {
     private static final long DEFAULT_SPECIALISATION_ID = 1L;
     private static final int DEFAULT_PER_PAGE_VALUE = 5;
     private static final int DEFAULT_PAGE_NUMBER = 1;
-    private static String DEFAULT_SORT_FIELD = "name";
+    private static String DEFAULT_SORT_FIELD = "published";
     private static String DEFAULT_SORT_DIRECTION = "desc";
     private static final Log logger = LogFactoryUtil.getLog("portlet-test-case-ISandS");
 
@@ -84,7 +83,7 @@ public class IndexController {
         Specialisation spec = specialisationService.getSpecById(specId);
         int totalCount = vacancyService.getVacancyCount(specId, areaId);
 
-        logger.info(String.format("Order by column %s, in direction %s", sortField, sortDir));
+        logger.debug(String.format("Order by column %s, in direction %s", sortField, sortDir));
         logger.debug(String.format("Change model, areaId = %d, specId = %d, page = %d, perPage = %d, totalCount = %d",
                 areaId, specId, page, perPage, totalCount));
         model.addAttribute("sortField", sortField);

@@ -6,7 +6,7 @@
 			 version="2.0">
 	<portlet>
 		<portlet-name>portlet-test-case</portlet-name>
-		<display-name>Portlet Test case for SandS</display-name>
+		<display-name>Portlet Test case for ISandS</display-name>
 		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
 		<init-param>
 			<name>contextConfigLocation</name>
@@ -21,9 +21,9 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>Portlet test ase for SandS</title>
+			<title>Portlet test ase for ISandS</title>
 			<short-title>Portlet demo</short-title>
-			<keywords>portlet,test case, SandS, hh.ru</keywords>
+			<keywords>portlet,test case, ISandS, hh.ru</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>

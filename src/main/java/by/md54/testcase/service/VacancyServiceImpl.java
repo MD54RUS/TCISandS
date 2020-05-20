@@ -55,12 +55,6 @@ public class VacancyServiceImpl implements VacancyService {
         return found;
     }
 
-//
-//    @Override
-//    public Iterable<Vacancy> getVacancy(long specialisationId, long areaId) {
-//        return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId);
-//    }
-
     @Override
     public Iterable<Vacancy> getVacancyPerPage(long specialisationId, long areaId, Pageable page) {
         return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId, page).getContent();
