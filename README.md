@@ -20,6 +20,23 @@ Using:
 First-time configuration
 -----
 * Define Liferay properties in pom.xml
+Or you can do it in your local reposytory in settings.xml like this:
+<settings>
+<profiles>
+<profile>
+	<id>liferay</id>
+	<properties>
+		<liferay.version>6.2.5</liferay.version>
+		<liferay.home>C:\servers\liferay-portal-6.2-ce-ga6</liferay.home>
+		<liferay.auto.deploy.dir>${liferay.home}\deploy</liferay.auto.deploy.dir>
+		<liferay.app.server.deploy.dir>${liferay.home}\tomcat-7.0.62\webapps</liferay.app.server.deploy.dir>
+		<liferay.app.server.lib.global.dir>${liferay.home}\tomcat-7.0.62\lib\ext</liferay.app.server.lib.global.dir>
+		<liferay.app.server.portal.dir>${liferay.home}\tomcat-7.0.62\webapps\ROOT</liferay.app.server.portal.dir>
+	</properties>
+</profile>
+</profiles>
+</settings>
+And use this profile with all maven tasks.
 
 * Configure your liferay portal
 
@@ -38,6 +55,32 @@ IntelliJ IDEA setup
 * For debugging your application
   * Create [Remote Run configuration](https://www.jetbrains.com/help/idea/2016.3/run-debug-configuration-remote.html) for remote debug. See [this article](http://blog.trifork.com/2014/07/14/how-to-remotely-debug-application-running-on-tomcat-from-within-intellij-idea/) for details.
 
+
+Для запуска
+First-time configuration
+-----
+* Определите параметры Liferay в pom.xml
+Или создайте профиль в settings.xml в локальном maven-репозитории и определите свойства там. Например:
+<settings>
+<profiles>
+<profile>
+	<id>liferay</id>
+	<properties>
+		<liferay.version>6.2.5</liferay.version>
+		<liferay.home>C:\servers\liferay-portal-6.2-ce-ga6</liferay.home>
+		<liferay.auto.deploy.dir>${liferay.home}\deploy</liferay.auto.deploy.dir>
+		<liferay.app.server.deploy.dir>${liferay.home}\tomcat-7.0.62\webapps</liferay.app.server.deploy.dir>
+		<liferay.app.server.lib.global.dir>${liferay.home}\tomcat-7.0.62\lib\ext</liferay.app.server.lib.global.dir>
+		<liferay.app.server.portal.dir>${liferay.home}\tomcat-7.0.62\webapps\ROOT</liferay.app.server.portal.dir>
+	</properties>
+</profile>
+</profiles>
+</settings>
+И подключайте этот профиль при выполнении задач maven.
+
+Развертывание
+------
+Для liferay + Tomcat положите .war файл в директорию deploy в папке портала и дождитесь авто-развертывания.
 
 //todo 
 * Комментарии
