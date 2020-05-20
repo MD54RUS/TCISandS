@@ -41,9 +41,9 @@ public class FilterController {
 
         logger.info("specId = " + specId);
 
-        Area root = null;
-        Area parent = null;
-        Area child = null;
+        Area root;
+        Area parent;
+        Area child;
         if (area.getParentId() == null) {
             root = area;
             parent = new Area(0, "", 0L);
@@ -65,7 +65,7 @@ public class FilterController {
 
 
         //todo переделать на Id?
-        //todo убрать null-значения
+
         model.addAttribute("root", root);
         model.addAttribute("parent", parent);
         model.addAttribute("child", child);
@@ -79,25 +79,4 @@ public class FilterController {
 
         return "portlet-test-case/changeFilter";
     }
-//
-//    @ModelAttribute("are_a")
-//    public Area populateArea() {
-//
-//        return new Area(1, "Moscow", null);
-//    }
-
-//
-//    @ActionMapping(params = "act=configRequest")
-//    public void changeFilter(ActionRequest request, Model model, ActionResponse response, SessionStatus sessionStatus) {
-//        sessionStatus.setComplete();
-//
-//        response.setRenderParameter("act", "changePagination");
-//        long areaId = ParamUtil.getLong(request, "areaId", DEFAULT_AREA_ID);
-//        long specId = ParamUtil.getLong(request, "specId", DEFAULT_SPECIALISATION_ID);
-//        logger.info("Change filter, areaId = " + areaId);
-//        vacancyService.loadVacancy(specId, areaId);
-//        model.addAttribute("specId", specId);
-//        model.addAttribute("areaId", areaId);
-//    }
-
 }

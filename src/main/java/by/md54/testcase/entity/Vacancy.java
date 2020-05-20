@@ -26,8 +26,8 @@ public class Vacancy {
     private Employer employer;
     @Column(name = "specialisation")
     private Long specialisation;
-    @Column(name = "published_at")
-    private Date published_at;
+    @Column(name = "published")
+    private Date published;
 
     public Vacancy(VacancyDTO dto) {
         this.id = dto.id;
@@ -40,7 +40,7 @@ public class Vacancy {
         this.area = new Area(dto.area);
         this.employer = new Employer(dto.employer);
         this.specialisation = dto.specialisation;
-        this.published_at = new java.sql.Date(dto.published_at.getTime());
+        this.published = new java.sql.Date(dto.published_at.getTime());
     }
 
     public Vacancy() {

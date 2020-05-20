@@ -10,20 +10,12 @@
 <jsp:useBean id="area" scope="request" type="by.md54.testcase.entity.Area"/>
 <jsp:useBean id="specialisation" scope="request" type="by.md54.testcase.entity.Specialisation"/>
 
-<%--    <jsp:useBean id="rootList" scope="request" type="java.lang.Iterable"/>--%>
-<%--    <jsp:useBean id="parentList" scope="request" type="java.lang.Iterable"/>--%>
-<%--    <jsp:useBean id="childList" scope="request" type="java.lang.Iterable"/>--%>
 <jsp:useBean id="areaList" scope="request" type="java.lang.Iterable"/>
 
 <jsp:useBean id="specialisationList" scope="request" type="java.lang.Iterable"/>
 
 <jsp:useBean id="root" scope="request" type="by.md54.testcase.entity.Area"/>
-<%--    <jsp:useBean id="parent" scope="request" type="by.md54.testcase.entity.Area"/>--%>
-<%--    <jsp:useBean id="child" scope="request" type="by.md54.testcase.entity.Area"/>--%>
 
-<%--<script type="text/javascript">--%>
-<%--    console.log($('option:selected').attr('data-raw'));--%>
-<%--</script>--%>
 <portlet:renderURL var="configRequestURL">
     <portlet:param name="act" value="configRequest"/>
 </portlet:renderURL>
@@ -58,7 +50,7 @@
                 <c:if test="${child.id==0}">
                     selected
                 </c:if>
-                > -- select an option -- </option>
+
                 <jsp:useBean id="child" scope="request" type="by.md54.testcase.entity.Area"/>
                 <c:forEach var="area_items" items="${areaList}">
                     <option value="${area_items}" data-id="${area_items.id}" data-parentId="${area_items.parentId}"

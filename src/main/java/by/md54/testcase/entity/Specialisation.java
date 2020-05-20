@@ -29,10 +29,4 @@ public class Specialisation {
         this.name = dto.name;
     }
 
-    public Specialisation(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-
 }

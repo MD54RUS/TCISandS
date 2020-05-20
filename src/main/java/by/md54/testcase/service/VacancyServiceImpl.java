@@ -46,7 +46,7 @@ public class VacancyServiceImpl implements VacancyService {
             for (VacancyDTO vacancyDTO : result.getBody().items) {
                 vacancyDTO.specialisation = specialisationId;
                 tempVacancy = new Vacancy(vacancyDTO);
-                employerRepository.save(tempVacancy.getEmployer());
+                employerRepository.update(tempVacancy.getEmployer());
                 vacancyRepository.save(tempVacancy);
             }
             pageNumber++;
@@ -55,16 +55,17 @@ public class VacancyServiceImpl implements VacancyService {
         return found;
     }
 
-
-    @Override
-    public Iterable<Vacancy> getVacancy(long specialisationId, long areaId) {
-        return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId);
-    }
+//
+//    @Override
+//    public Iterable<Vacancy> getVacancy(long specialisationId, long areaId) {
+//        return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId);
+//    }
 
     @Override
     public Iterable<Vacancy> getVacancyPerPage(long specialisationId, long areaId, Pageable page) {
         return vacancyRepository.findBySpecialisationAndAreaId(specialisationId, areaId, page).getContent();
     }
+
 
     @Override
     public int getVacancyCount(long specialisationId, long areaId) {

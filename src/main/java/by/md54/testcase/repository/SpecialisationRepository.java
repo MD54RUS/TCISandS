@@ -11,5 +11,4 @@ public interface SpecialisationRepository extends CrudRepository<Specialisation,
 
     Optional<Specialisation> findById(long id);
 
-
 }

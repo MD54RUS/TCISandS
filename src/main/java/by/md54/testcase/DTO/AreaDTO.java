@@ -5,5 +5,4 @@ public class AreaDTO {
     public String name;
     public Long parent_id;
     public AreaDTO[] areas;
-
 }
