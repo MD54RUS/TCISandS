@@ -6,37 +6,57 @@ function filterSelectChange(id) {
     const areaId = document.getElementById('areaId');
     const specId = document.getElementById('specId');
     let collection;
+    let parentId;
+    let childId;
 
     switch (id) {
         case 'area_root':
             const rootArea = selectRoot.options[selectRoot.selectedIndex];
             collection = selectParent.options;
             for (let i = 0; i < collection.length; i++) {
-                collection.item(i).hidden =
-                    collection.item(i).getAttribute('data-parentId') !==
-                    rootArea.getAttribute('data-id');
                 collection.item(i).selected = false;
+                if (collection.item(i).getAttribute('data-parentId') !==
+                    rootArea.getAttribute('data-id')) {
+                    collection.item(i).hidden = true
+                } else {
+                    collection.item(i).hidden = false;
+                    if (parentId === undefined) {
+                        collection.item(i).selected = true;
+                        parentId = collection.item(i).getAttribute('data-id');
+                    }
+                }
             }
-            collection.item(0).selected = true;
             for (let j = 1; j < selectChild.options.length; j++) {
-                selectChild.options.item(j).hidden = true;
                 selectChild.options.item(j).selected = false;
+                if (selectChild.options.item(j).getAttribute('data-parentId') !== parentId) {
+                    selectChild.options.item(j).hidden = true;
+                } else {
+                    selectChild.options.item(j).hidden = false;
+                    if (childId === undefined) {
+                        childId = selectChild.options.item(j).getAttribute('data-id');
+                        selectChild.options.item(j).selected = true;
+                        areaId.value = childId;
+                    }
+                }
             }
-            selectChild.options.item(0).selected = true;
-            selectChild.options.item(0).hidden = true;
-            areaId.value = rootArea.getAttribute('data-id');
             break;
         case 'area_parent':
             const parentArea = selectParent.options[selectParent.selectedIndex];
+            parentId = parentArea.getAttribute('data-id');
             collection = selectChild.options;
             for (let i = 0; i < collection.length; i++) {
-                collection.item(i).hidden =
-                    collection.item(i).getAttribute('data-parentId') !==
-                    parentArea.getAttribute('data-id');
                 collection.item(i).selected = false;
+                if (collection.item(i).getAttribute('data-parentId') !== parentId) {
+                    collection.item(i).hidden = true;
+                } else {
+                    collection.item(i).hidden = false;
+                    if (childId === undefined) {
+                        collection.item(i).selected = true;
+                        childId = collection.item(i).getAttribute('data-id');
+                        areaId.value = childId;
+                    }
+                }
             }
-            collection.item(0).selected = true;
-            areaId.value = parentArea.getAttribute('data-id');
             break;
         case 'area_child':
             const childArea = selectChild.options[selectChild.selectedIndex];
@@ -48,4 +68,5 @@ function filterSelectChange(id) {
             break;
     }
 }
+
 

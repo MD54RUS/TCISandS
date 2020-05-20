@@ -24,6 +24,7 @@ This is the <b>test case for ISandS</b> portlet.<br />
 </portlet:renderURL>
 
 
+
 <%--<a href="<%=showFilteringFormURL%>">Change filter</a>--%>
 
 
@@ -35,8 +36,8 @@ This is the <b>test case for ISandS</b> portlet.<br />
 
 
 <div class="filter_label">
-    <label path="AreaName" class="blockLine">${area.name}</label>
-    <label path="SpecialisationName" class="blockLine">${specialisation.name}</label>
+    <label class="blockLine">${area.name}</label>
+    <label class="blockLine">${specialisation.name}</label>
 
     <aui:button class="blockLine" onClick="<%=showFilteringFormURL%>" value="Change filter"/>
 </div>

@@ -24,16 +24,15 @@
 <%--<script type="text/javascript">--%>
 <%--    console.log($('option:selected').attr('data-raw'));--%>
 <%--</script>--%>
-<portlet:actionURL var="configRequest">
-    <%--    <portlet:param name="act" value="updateFilter"/>--%>
-</portlet:actionURL>
+<portlet:renderURL var="configRequestURL">
+    <portlet:param name="act" value="configRequest"/>
+</portlet:renderURL>
 
 
-<form name="editRequestConf" method="post" action="${configRequest}">
+<form name="editRequestConf" method="post" action="${configRequestURL}">
     <div class="areaFilter filterBlock">
         <label id="area_label">Регион:</label>
         <select id="area_root" class="filter-select-area" onchange="filterSelectChange('area_root')">
-            <option value="blank" disabled> -- select an option --</option>
             <c:forEach var="area_items" items="${areaList}">
                 <option value="${area_items.name}" data-id="${area_items.id}" data-parentId="${area_items.parentId}"
                     ${area_items.id == root.id ? "selected" : ""}
@@ -43,7 +42,6 @@
             </c:forEach>
         </select>
         <select id="area_parent" class="filter-select-area" onchange="filterSelectChange('area_parent')">
-            <option value="blank" disabled> -- select an option --</option>
             <c:forEach var="area_items" items="${areaList}">
                 <option value="${area_items}" data-id="${area_items.id}" data-parentId="${area_items.parentId}"
                         <jsp:useBean id="parent" scope="request" type="by.md54.testcase.entity.Area"/>
@@ -57,15 +55,18 @@
         </select>
         <select id="area_child" class="filter-select-area" onchange="filterSelectChange('area_child')">
             <c:if test="${not empty parent}">
-                <option value="blank" disabled> -- select an option --</option>
+                <c:if test="${child.id==0}">
+                    selected
+                </c:if>
+                > -- select an option -- </option>
+                <jsp:useBean id="child" scope="request" type="by.md54.testcase.entity.Area"/>
                 <c:forEach var="area_items" items="${areaList}">
                     <option value="${area_items}" data-id="${area_items.id}" data-parentId="${area_items.parentId}"
-                            <jsp:useBean id="child" scope="request" type="by.md54.testcase.entity.Area"/>
-                            <c:if test="${not empty child}">
+                            <c:if test="${not empty child && child.id!=0}">
                                 ${area_items.parentId != child.parentId ? "hidden" : ""}
                                 ${area_items.id == child.id ? "selected" : ""}
                             </c:if>
-                            <c:if test="${empty child}">
+                            <c:if test="${empty child || child.id==0}">
                                 ${"hidden"}
                             </c:if>
                     >${area_items.name}

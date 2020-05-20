@@ -12,12 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.RenderRequest;
 
 @Controller
@@ -29,6 +25,7 @@ public class FilterController {
     private static final long DEFAULT_SPECIALISATION_ID = 1L;
     private final AreaService areaService;
     private final SpecialisationService specialisationService;
+
 
     private static final Log logger = LogFactoryUtil.getLog("portlet=test-cate");
 
@@ -49,9 +46,12 @@ public class FilterController {
         Area child = null;
         if (area.getParentId() == null) {
             root = area;
+            parent = new Area(0, "", 0L);
+            child = new Area(0, "", 0L);
         } else if (areaService.getArea(area.getParentId()).getParentId() == null) {
             root = areaService.getArea(area.getParentId());
             parent = area;
+            child = new Area(0, "", 0L);
         } else {
             child = area;
             parent = areaService.getArea(area.getParentId());
@@ -65,6 +65,7 @@ public class FilterController {
 
 
         //todo переделать на Id?
+        //todo убрать null-значения
         model.addAttribute("root", root);
         model.addAttribute("parent", parent);
         model.addAttribute("child", child);
@@ -85,16 +86,18 @@ public class FilterController {
 //        return new Area(1, "Moscow", null);
 //    }
 
-
-    @ActionMapping(params = "act=addRecord")
-    public void changeFilter(ActionRequest request, Model model, ActionResponse response, SessionStatus sessionStatus) {
-        response.setRenderParameter("act", "records");
-        // set the session status as complete to cleanup the model attributes
-        // stored using @SessionAttributes, otherwise when you click
-        // 'Add Record' button you'll see the record information pre-populated
-        // because the getCommandObject method of the controller is not
-        // invoked
-        sessionStatus.setComplete();
-    }
+//
+//    @ActionMapping(params = "act=configRequest")
+//    public void changeFilter(ActionRequest request, Model model, ActionResponse response, SessionStatus sessionStatus) {
+//        sessionStatus.setComplete();
+//
+//        response.setRenderParameter("act", "changePagination");
+//        long areaId = ParamUtil.getLong(request, "areaId", DEFAULT_AREA_ID);
+//        long specId = ParamUtil.getLong(request, "specId", DEFAULT_SPECIALISATION_ID);
+//        logger.info("Change filter, areaId = " + areaId);
+//        vacancyService.loadVacancy(specId, areaId);
+//        model.addAttribute("specId", specId);
+//        model.addAttribute("areaId", areaId);
+//    }
 
 }

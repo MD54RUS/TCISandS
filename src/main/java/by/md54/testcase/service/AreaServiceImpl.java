@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 
 public class AreaServiceImpl implements AreaService {
-    //todo Страны?
     private static final String URL_COUNTRIES = "https://api.hh.ru/areas/countries";
     private static final String URL = "https://api.hh.ru/areas/%d";
     private final RestTemplate restTemplate = new RestTemplate();

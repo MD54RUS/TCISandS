@@ -17,6 +17,10 @@ public interface VacancyRepository extends CrudRepository<Vacancy, Long>, Paging
 
     Page<Vacancy> findBySpecialisationAndAreaId(long specialisation, long areaId, Pageable page);
 
+    Iterable<Vacancy> findBySpecialisationAndAreaId(long specialisation, long areaId);
+
     Page<Vacancy> findAll(Pageable pageable);
+
+    int countBySpecialisationAndAreaId(long specialisation, long areaId);
 
 }
