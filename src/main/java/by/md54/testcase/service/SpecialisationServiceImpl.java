@@ -37,6 +37,6 @@ public class SpecialisationServiceImpl implements SpecialisationService {
 
     @Override
     public Specialisation getSpecById(long id) {
-        return specialisationRepository.findById(id).orElse(null);
+        return specialisationRepository.findById(id);
     }
 }

@@ -27,7 +27,7 @@ public class FilterController {
     private final SpecialisationService specialisationService;
 
 
-    private static final Log logger = LogFactoryUtil.getLog("portlet=test-cate");
+    private static final Log logger = LogFactoryUtil.getLog("portlet-test-cate");
 
 
     @RenderMapping(params = "act=changeFilter")
