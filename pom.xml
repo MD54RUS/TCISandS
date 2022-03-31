@@ -13,7 +13,7 @@
         <plugin.type>portlet</plugin.type>
         <liferay.version>6.2.5</liferay.version>
         <liferay.maven.plugin.version>6.2.10.13</liferay.maven.plugin.version>
-        <spring.version>4.3.5.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
     </properties>
 
     <build>
